@@ -1,0 +1,49 @@
+<html lang="en">
+<head>
+    <title>Passwordzzz</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Girassol&family=Righteous&family=Yatra+One&family=Syne+Mono&display=swap" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+
+</head>
+<body>
+
+<div class = "text-block" id = "introduction-rules">
+    <p>It's time to meet password requirements. Please devise a password that meets the guidelines within the time limit.</p>
+    <button id="start-button">BEGIN</button>
+    
+</div>
+
+<div id = "play-box">
+    <p>Password #<span id = "password-number"></span></p>
+    <p>Time: <span id = "timer"></span></p>
+    <p>Password rules:</p>
+    </span> <span id = "password-length-rule"></span> <span id = "password-length-check"></span>
+    <p><div id = "password-rule-list"></div></p>
+    <p>Password: <input autocomplete="off" type="text" id = 'password-input' maxlength=30 size=30 onkeypress="return avoidSpace(event)"></input></p>
+    <button id = "submit-button">SUBMIT</button>
+    <div id = "warning-box"></div>
+</div>
+
+<div id = "results-box" class="text-block">
+    <div id = "password-results">
+        tk
+    </div>
+    <div>Time spent resetting passwords: <span id = "time-stopwatch"></span></div>
+    <div id = "password-incomplete">Your password remains incomplete. Please select a new password.</div>
+    <p></p>
+    <button id = "next-button">NEXT</button>
+</div>
+<div id = "final-box" class="text-block">
+    <p>Your password has been accepted.</p>
+    <p>Your password is: <span id = "final-password"></span></p>
+    <p>You spent <span id = "final-time"></span> on the construction of your final password.</p>
+    <div id = 'game-choices'></div>
+    <p>Thank you for your participation. Please save or transcribe your keyword: <span id = "pass-fragment"></span></p>
+    <p>© 20XX Adi Robertson, William Joel, and The Verge</p>
+
+</div>
+
+    <script src="main.js"></script>
+</body>
+</html>

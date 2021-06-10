@@ -1,0 +1,63 @@
+body {
+    background-color: #ffffff;
+}
+
+.menu-button {
+    background-color:#1ea033;
+    border: 2px solid #084b08;
+    border-radius:5px;
+    color:#ffffff;
+    font-size:20px;
+    margin:auto;
+    text-align:center;
+    max-width:100px;
+    padding:2px;
+    cursor:pointer;
+}
+
+.text-block {
+    margin:5%;
+}
+
+#introduction-rules {
+    display:block;
+}
+
+#play-box {
+    display:none;
+    max-width:800px;
+    margin:auto;
+    margin-top:5%;
+}
+
+#warning-box {
+    color:#ff0000;
+}
+
+#results-box {
+    display:none;
+}
+
+#final-box {
+    display:none;
+}
+
+#password-length-rule {
+    display:inline-block;
+    color:#ff0000;
+}
+
+#password-rule-1 {
+    display:block;
+    color:#ff0000;
+}
+
+#password-rule-2 {
+    display:block;
+    color:#ff0000;
+}
+
+#password-rule-3 {
+    display:block;
+    color:#ff0000;
+}
