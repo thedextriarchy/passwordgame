@@ -83,21 +83,21 @@ let gameResults = {
 };
 
 let secretCode = {
-    viewMirror: '1:1/0',
-    rejectMirror: '2:asks:',
-    viewMirror: '3:The',
+    viewMirror: '1:Why',
+    rejectMirror: '2:doesn\'t',
+    viewMirror: '3:the',
     rejectMirror: '4:air',
-    stopBox: '5:doesn\'t',
-    driveBox: '6:taste',
-    stopMirror: '7:like',
-    driveMirror: '8:it,',
-    diveLake: '9:used',
-    watchLake: '10:to,',
-    enterStore: '11:does',
-    outsideStore: '12:it?'
+    stopBox: '5:taste',
+    driveBox: '6:as',
+    stopMirror: '7:light',
+    driveMirror: '8:as,',
+    diveLake: '9:it',
+    watchLake: '10:did,',
+    enterStore: '11:in',
+    outsideStore: '12:2012?'
 };
 
-let fullSecretCode = '1/0asks:Theairdoesn\'ttastelikeitusedto,doesit?';
+let fullSecretCode = 'Whydoesn\'ttheairtasteaslightasitdidin2012?';
 
 
 
@@ -107,7 +107,7 @@ const questionLevel = [
 {
     rank: 1,
     min: 4,
-    max: 46,
+    max: 42,
 },
 {
     rank: 2,
@@ -372,7 +372,7 @@ const ruleStory = [
 {
     name: 'Includes the time you run back to your car',
     rank: 6,
-    exp: "tk",
+    exp: "(1[0-2]|0?[1-9]):([0-5]?[0-9])([AP]M)?",
     cased: false,
     active: true,
     requires: [],
@@ -467,7 +467,7 @@ const ruleStory = [
 {
     name: 'Contains the time you enter the holding cell',
     rank: 8,
-    exp: "tk",
+    exp: "(1[0-2]|0?[1-9]):([0-5]?[0-9])([AP]M)?",
     cased: false,
     active: true,
     requires: ['takeArtifact','surrenderPolice'],
@@ -524,7 +524,7 @@ const ruleStory = [
 {
     name: 'Includes the time the box flies from the seat',
     rank: 8,
-    exp: "tk",
+    exp: "(1[0-2]|0?[1-9]):([0-5]?[0-9])([AP]M)?",
     cased: false,
     active: true,
     requires: ['pickWheel','takeArtifact','resistPolice'],
@@ -637,7 +637,7 @@ const ruleStory = [
 {
     name: 'Ends with the time the man says: \"Don\'t worry. You\'ll know soon.\"',
     rank: 9,
-    exp: "tk",
+    exp: "(1[0-2]|0?[1-9]):([0-5]?[0-9])([AP]M)?",
     cased: false,
     active: true,
     requires: ['takeArtifact','viewArtifact','pickWheel'],
@@ -674,7 +674,7 @@ const ruleStory = [
 {
     name: 'Ends with the time the man says: \"Hm. I\'m sure the next vessel will cooperate.\"',
     rank: 9,
-    exp: "tk",
+    exp: "(1[0-2]|0?[1-9]):([0-5]?[0-9])([AP]M)?",
     cased: false,
     active: true,
     requires: ['takeArtifact','rejectArtifact','pickWheel'],
@@ -700,7 +700,7 @@ const ruleStory = [
     timeline: 'ceg'
 },
 {
-    name: 'Includes the sound of a',
+    name: 'Includes the ',
     rank: 9,
     exp: "tk",
     cased: false,
