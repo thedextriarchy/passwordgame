@@ -11,6 +11,7 @@ let passwordGood;
 // Final stats
 let finalPassword;
 let finalChoices = [];
+let finalCodeFragment;
 
 let rulePassed = 0;
 
@@ -57,8 +58,8 @@ let gameState = {
 };
 
 let gameResults = {
-    pickMirrors: 'You chose the hall of mirrors.',
-    pickWheel: 'You chose the ferris wheel.',
+    pickMirrors: 'You visited the hall of mirrors.',
+    pickWheel: 'You visiited the ferris wheel.',
     takeMirror: 'You took the mirror shard.',
     leaveMirror: 'You left the mirror shard.',
     takeBox: 'You took the unlabeled box.',
@@ -82,21 +83,21 @@ let gameResults = {
 };
 
 let secretCode = {
-    viewMirror: 'E1:1/0',
-    rejectMirror: 'E2:asks:',
-    viewMirror: 'E3:The',
-    rejectMirror: 'E4:air',
-    stopBox: 'E5:doesn\'t',
-    driveBox: 'E6:taste',
-    stopMirror: 'E7:like',
-    driveMirror: 'E8:it,',
-    diveLake: 'E9:used',
-    watchLake: 'E10:to,',
-    enterStore: 'E11:does',
-    outsideStore: 'E12:it?'
+    viewMirror: '1:1/0',
+    rejectMirror: '2:asks:',
+    viewMirror: '3:The',
+    rejectMirror: '4:air',
+    stopBox: '5:doesn\'t',
+    driveBox: '6:taste',
+    stopMirror: '7:like',
+    driveMirror: '8:it,',
+    diveLake: '9:used',
+    watchLake: '10:to,',
+    enterStore: '11:does',
+    outsideStore: '12:it?'
 };
 
-testVar = 'test';
+let fullSecretCode = '1/0asks:Theairdoesn\'ttastelikeitusedto,doesit?';
 
 
 
@@ -214,9 +215,9 @@ const ruleReq = {
 
 const ruleGeneric = [
 {
-    name: 'Includes an exclamation point',
+    name: 'Includes a question mark',
     rank: 1,
-    exp: "!",
+    exp: "\\?",
     cased:false
 },
 {
@@ -618,7 +619,7 @@ const ruleStory = [
 {
     name: 'Begins with the seconds it takes to snap the latch',
     rank: 9,
-    exp: "^[1-3].*$",
+    exp: "^[1-9].*$",
     cased: false,
     active: true,
     requires: ['takeArtifact','viewArtifact','pickWheel'],
@@ -655,7 +656,7 @@ const ruleStory = [
 {
     name: 'Begins with the number of pinpricks the box leaves on your hand',
     rank: 9,
-    exp: "^[1-5]$",
+    exp: "^[1-5].*$",
     cased: false,
     active: true,
     requires: ['takeArtifact','rejectArtifact','pickWheel'],
@@ -692,6 +693,7 @@ const ruleStory = [
 {
     name: 'Begins with the seconds it takes to raise the mirror',
     rank: 9,
+    exp:"^[1-9].*$",
     cased: false,
     active: true,
     requires: ['takeArtifact','viewArtifact','pickMirrors'],
@@ -936,6 +938,12 @@ const submitPassword = (password) => {
     // Add the password to your final password
     finalPassword += password;
     // Systems for choice branching
+    if (question === 1){
+        let regex = new RegExp(fullSecretCode);
+        if (regex.test(password) === true){
+            enteredSecretCode();
+        };
+    };
     password = password.toLowerCase();
     if (question === 3){
         if (/hallofmirrors/.test(password) === true){
@@ -1008,26 +1016,49 @@ const submitPassword = (password) => {
                 if (/close/.test(password) === true){
                     gameState.stopDriving = true;
                     pruneBranch = 'keepDriving';
+                    finalChoices.push(gameResults.stopBox);
+                    finalCodeFragment = secretCode.stopBox;
                 } else if (/drive/.test(password) === true){
                     gameState.keepDriving = true;
                     pruneBranch = 'stopDriving';
+                    finalChoices.push(gameResults.driveBox);
+                    finalCodeFragment = secretCode.driveBox;
                 };
             } else if (gameState.pickMirrors === true){
                 if (/yes/.test(password) === true){
                     gameState.stopDriving = true;
                     pruneBranch = 'keepDriving';
+                    finalChoices.push(gameResults.stopMirror);
+                    finalCodeFragment = secretCode.stopMirror;
+
                 } else if (/no/.test(password) === true){
                     gameState.keepDriving = true;
                     pruneBranch = 'stopDriving';
+                    finalChoices.push(gameResults.driveMirror);
+                    finalCodeFragment = secretCode.driveMirror;
                 };
             };
         } else if (gameState.surrenderPolice === true && gameState.takeArtifact === true){
             if (/yes/.test(password) === true){
                 gameState.viewArtifact = true;
                 pruneBranch = 'rejectArtifact';
+                if (gameState.pickWheel === true){
+                    finalChoices.push(gameResults.viewBox);
+                    finalCodeFragment = secretCode.viewBox;
+                } else if (gameState.pickMirrors === true){
+                    finalChoices.push(gameResults.viewMirror);
+                    finalCodeFragment = secretCode.viewMirror;
+                };
             } else if (/no/.test(password) === true){
                 gameState.rejectArtifact = true;
                 pruneBranch = 'viewArtifact';
+                if (gameState.pickWheel === true){
+                    finalChoices.push(gameResults.rejectBox);
+                    finalCodeFragment = secretCode.rejectBox;
+                } else if (gameState.pickMirrors === true){
+                    finalChoices.push(gameResults.rejectMirror);
+                    finalCodeFragment = secretCode.rejectMirror;
+                };
             };
         } else if (gameState.visitLake === true){
             if (/depth/.test(password) === true){
@@ -1120,6 +1151,7 @@ const endGame = () => {
     document.getElementById('final-box').style.display = 'block';
     document.getElementById('final-time').innerHTML = timeClock;
     document.getElementById('final-password').innerHTML = finalPassword;
+    document.getElementById('code-fragment').innerHTML = finalCodeFragment;
     let gameChoices = document.getElementById('game-choices');
     let l = document.createElement('ul');
     for (let i = 0; i < finalChoices.length; i++){
@@ -1130,6 +1162,11 @@ const endGame = () => {
     };
     gameChoices.appendChild(l);
 }; 
+
+const enteredSecretCode = () => {
+    document.getElementById('results-box').style.display = 'none';
+    document.getElementById('secret-code-box').style.display = 'block';
+};
 
 // Lose game if timer hits 0
 
