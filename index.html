@@ -1,6 +1,6 @@
 <html lang="en">
 <head>
-    <title>Standardized Password Entry System</title>
+    <title>Normal Password System</title>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Girassol&family=Righteous&family=Yatra+One&family=Syne+Mono&display=swap" rel="stylesheet">
     <link href="styles.css" rel="stylesheet">
@@ -9,7 +9,7 @@
 <body>
 
 <div class = "text-block" id = "introduction-rules">
-    <h1>Welcome To The Standardized Password Entry System</h1>
+    <h1>Welcome to the normal password entry system</h1>
     <p>A secure password is important for online account integrity. You will be asked to generate a secure password on the following page. Please meet all listed requirements to complete your secure password.</p>
     <p>If you are unsure of the correct input for a given requirement, simply trust your impulses.</p>
     <button id="start-button">BEGIN</button>
@@ -22,15 +22,13 @@
     <p>Password rules:</p>
     </span> <span id = "password-length-rule"></span> <span id = "password-length-check"></span>
     <p><div id = "password-rule-list"></div></p>
-    <p>Password: <input autocomplete="off" type="text" id = 'password-input' maxlength=43 size=30 onkeypress="return avoidSpace(event)"></input></p>
+    <p>Password: <input autocomplete="off" type="text" id = 'password-input' maxlength=94 size=30 onkeypress="return avoidSpace(event)"></input></p>
     <button id = "submit-button">SUBMIT</button>
     <div id = "warning-box"></div>
 </div>
 
 <div id = "results-box" class="text-block">
-    <div id = "password-results">
-        tk
-    </div>
+    <div> Your password is: <span id = "password-results"></span></div>
     <div>Time spent resetting passwords: <span id = "time-stopwatch"></span></div>
     <div id = "password-incomplete">Your password remains incomplete. Please select a new password.</div>
     <p></p>
@@ -39,14 +37,21 @@
 <div id = "final-box" class="text-block">
     <p>Your password has been accepted.</p>
     <p>Your password is: <span id = "final-password"></span></p>
+    <div>Your password's length is: <span id = "final-password-length"></span> characters.</div>
     <p>You spent <span id = "final-time"></span> on the construction of your final password.</p>
     <div id = 'game-choices'></div>
-    <p>Thank you for your participation. Please save or transcribe your keyword: <span id = "code-fragment"></span></p>
-    <p>© 20XX Adi Robertson, William Joel, and The Verge</p>
+    <p>Thank you for your participation.</p>
+    <p>Take note of your ending keyword (Fragment <span id = "code-fragment-number"></span> of 12): <span id = "code-fragment"></span></p>
+    <button id = "restart-button">RESTART</button>
+    <p>Created by Adi Robertson and William Joel for <i>The Verge</i>. Special thanks to Christopher Dare, Gaby Brenes, and Charles Pratt.</p>
 
 </div>
 <div id = "secret-code-box" class="text-block">
-    BETTER NOT TO ASK
+    <p>Thank you for completing the Normal Password Entry System project. A representative will find you soon.</p>    
+    <p>Please do not attempt to hide from the representative.</p>
+    <p>Your cooperation is appreciated.</p>
+    <p>Your resistance will be inadequate.</p>
+    <button id = "restart-button-secret">RESTART?</button>
 </div>
 
     <script src="main.js"></script>
