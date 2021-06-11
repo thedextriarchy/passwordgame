@@ -83,23 +83,23 @@ let gameResults = {
 };
 
 let secretCode = {
-    viewMirror: '1.Why',
-    rejectMirror: '2.doesn\'t',
-    viewBox: '3.the',
-    rejectBox: '4.air',
-    stopBox: '5.taste',
-    driveBox: '6.the',
-    stopMirror: '7.way',
-    driveMirror: '8.it',
-    diveLake: '9.did',
-    watchLake: '10.back,',
-    enterStore: '11.in',
-    outsideStore: '12.1985?'
+    viewMirror: 'why',
+    rejectMirror: 'doesn\'t',
+    viewBox: 'our',
+    rejectBox: 'air',
+    stopBox: 'taste',
+    driveBox: 'the',
+    stopMirror: 'way',
+    driveMirror: 'it',
+    diveLake: 'did',
+    watchLake: 'back,',
+    enterStore: 'in',
+    outsideStore: '2023?'
 };
 
 finalCodeFragment = secretCode.stopBox;
 
-let fullSecretCode = 'Whydoesn\'ttheairtastethewayitdidbackin1985?';
+let fullSecretCode = 'whydoesn\'tourairtastethewayitdidbackin2023?';
 
 
 
@@ -209,7 +209,7 @@ const ruleReq = {
     name: 'Includes at least one uppercase letter, lowercase letter, number, and special character',
     //name: 'Begins with a US interstate highway',
     rank: 0,
-    exp: "(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-\])",
+    exp: "(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[:#?!@$%^&*-\])",
     //exp: "(1[0-2]|0?[1-9])((:[0-5][0-9])|[ap]m|(:[0-5][0-9])[ap]m)",
     //exp:"^.*(1[0-2]|0?[1-9])((:[0-5][0-9])|[ap]m|(:[0-5][0-9])[ap]m)$",
     //exp:'^[i](nterstate)?[-]?[1-9].*$',
@@ -652,9 +652,9 @@ const ruleStory = [
     timeline: 'ceg'
 },
 {
-    name: 'Enter the date the first stars burn out. It\'s sooner than you think.',
+    name: 'Enter the date (DD/MM/YYYY) the first stars burn out. It\'s sooner than you think.',
     rank: 10,
-    exp: "tk",
+    exp: "(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})",
     cased: false,
     active: true,
     requires: ['takeArtifact','viewArtifact','surrenderPolice','pickWheel'],
@@ -664,7 +664,7 @@ const ruleStory = [
 {
     name: 'Begins with the number of pinpricks the box leaves on your hand',
     rank: 9,
-    exp: "^[1-5].*$",
+    exp: "^[1-9].*$",
     cased: false,
     active: true,
     requires: ['takeArtifact','rejectArtifact','surrenderPolice','pickWheel'],
