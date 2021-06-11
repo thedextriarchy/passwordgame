@@ -85,8 +85,8 @@ let gameResults = {
 let secretCode = {
     viewMirror: '1.Why',
     rejectMirror: '2.doesn\'t',
-    viewMirror: '3.the',
-    rejectMirror: '4.air',
+    viewBox: '3.the',
+    rejectBox: '4.air',
     stopBox: '5.taste',
     driveBox: '6.the',
     stopMirror: '7.way',
@@ -458,7 +458,7 @@ const ruleStory = [
 {
     name: 'Ends where you stop to rest: deep lake or parking lot',
     rank: 7,
-    exp: "^.*[deeplake|parkinglot]$",
+    exp: "^.*lake|lot$",
     cased: false,
     active: true,
     requires: ['leaveArtifact'],
@@ -634,7 +634,7 @@ const ruleStory = [
 {
     name: 'Includes the color of the emptiness inside',
     rank: 9,
-    exp: "black|blue|void|nothing|white|clear",
+    exp: "black|blue|void|nothing|white|clear|brown|red",
     cased: false,
     active: true,
     requires: ['takeArtifact','viewArtifact','pickWheel'],
@@ -808,26 +808,268 @@ const ruleStory = [
 },
 // Ignore the box and keep driving
 {
-    name: 'Starts with',
+    name: 'Starts with the seat the box rolls into',
+    rank: 9,
+    exp:"^left|right|back|front|middle|driver|passenger.*$",
+    cased: false,
+    active: true,
+    requires: ['takeArtifact','resistPolice','pickWheel','keepDriving'],
+    timeline: 'ceg'
+},
+{
+    name: 'Includes the fabric of its lining when it bursts open',
+    rank: 9,
+    exp: "velvet|linen|cotton|twill|damask|rayon|polyester|lace|crepe|denim|satin|flannel|canvas|cashmere|wool|chiffon|gingham|leather|muslin|silk|suede|spandex|taffeta|tulle|tweed|vinylon",
+    cased: false,
+    active: true,
+    requires: ['takeArtifact','resistPolice','pickWheel','keepDriving'],
+    timeline: 'ceg'
+},
+{
+    name: 'Ends with the time it closes of its own accord',
     rank: 9,
     exp:"^.*(1[0-2]|0?[1-9]):([0-5]?[0-9])([AP]M)?$",
     cased: false,
     active: true,
-    requires: ['takeArtifact','resistPolice','pickWheel','stopDriving'],
+    requires: ['takeArtifact','resistPolice','pickWheel','keepDriving'],
+    timeline: 'ceg'
+},
+{
+    name: 'Enter the number of radio stations you try to find as you keep driving. Not a single one of them tunes in.',
+    rank: 10,
+    exp:"[1-9]",
+    cased: false,
+    active: true,
+    requires: ['takeArtifact','resistPolice','pickWheel','keepDriving'],
+    timeline: 'ceg'
+},
+// Stop to help the officer
+{
+    name: 'Starts with the time you stop to help the officer',
+    rank: 9,
+    exp:"^.*(1[0-2]|0?[1-9]):([0-5]?[0-9])([AP]M)?$",
+    cased: false,
+    active: true,
+    requires: ['takeArtifact','resistPolice','pickMirrors','stopDriving'],
+    timeline: 'ceg'
+},
+{
+    name: 'Contains the frequency of his radio call for backup',
+    rank: 9,
+    exp:"[1-8][0-9]{1,2}mhz|megahertz",
+    cased: false,
+    active: true,
+    requires: ['takeArtifact','resistPolice','pickMirrors','stopDriving'],
+    timeline: 'ceg'
+},
+{
+    name: 'Ends with the color of the car approaching as he drives you away',
+    rank: 9,
+    exp:"^.*black|red|gray|white|cream|green|blue|silver|orange|brown|beige|gold|yellow|purple$",
+    cased: false,
+    active: true,
+    requires: ['takeArtifact','resistPolice','pickMirrors','stopDriving'],
+    timeline: 'ceg'
+},
+{
+    name: function() {
+        return 'Enter the hand that the ' + gameState.womanDress + '-clad woman uses to take the mirror. She smiles at you as she wipes the blood off with her dress.'
+   },
+    rank: 10,
+    exp:"left|right|center",
+    cased: false,
+    active: true,
+    requires: ['takeArtifact','resistPolice','pickMirrors','stopDriving'],
+    timeline: 'ceg',
+    function:true
+},
+// Ignore the officer and keep driving
+{
+    name: 'Starts with the miles you drive with the mirror beside you',
+    rank: 9,
+    exp:"^[1-9].*$",
+    cased: false,
+    active: true,
+    requires: ['takeArtifact','resistPolice','pickMirrors','stopDriving'],
+    timeline: 'ceg'
+},
+{
+    name: 'Contains the time you realize your finger is no longer bleeding',
+    rank: 9,
+    exp:"(1[0-2]|0?[1-9]):([0-5]?[0-9])([AP]M)?",
+    cased: false,
+    active: true,
+    requires: ['takeArtifact','resistPolice','pickMirrors','stopDriving'],
+    timeline: 'ceg'
+},
+{
+    name: 'Contains the number of times you squeeze to try to make it bleed',
+    rank: 9,
+    exp:"[1-9]",
+    cased: false,
+    active: true,
+    requires: ['takeArtifact','resistPolice','pickMirrors','stopDriving'],
+    timeline: 'ceg'
+},
+{
+    name: 'Enter the state where you first try to remember your name. No matter how hard you think, it won\'t come to you.',
+    rank: 10,
+    exp: "alabama|alaska|arizona|arkansas|california|colorado|connecticut|delaware|florida|georgia|hawaii|idaho|illinois|indiana|iowa|kansas|kentucky|louisiana|maine|maryland|massachusetts|michigan|minnesota|mississippi|missouri|montana|nebraska|nevada|newhampshire|newjersey|newmexico|newyork|northcarolina|northdakota|ohio|oklahoma|oregon|pennsylvania|rhodeisland|southcarolina|southdakota|tennessee|texas|utah|vermont|virginia|washington|westvirginia|wisconsin|wyoming",
+    cased: false,
+    active: true,
+    requires: ['takeArtifact','resistPolice','pickMirrors','stopDriving'],
+    timeline: 'ceg'
+},
+// Look into the lake
+{
+    name: 'Starts with the hours you stare into the lake',
+    rank: 9,
+    exp:"^[1-9].*$",
+    cased: false,
+    active: true,
+    requires: ['leaveArtifact','visitLake','stayOutside'],
+    timeline: 'ceg'
+},
+{
+    name: 'Contains the time you reach to touch your reflection',
+    rank: 9,
+    exp:"(1[0-2]|0?[1-9]):([0-5]?[0-9])([AP]M)?",
+    cased: false,
+    active: true,
+    requires: ['leaveArtifact','visitLake','stayOutside'],
+    timeline: 'ceg'
+},
+{
+    name: 'Ends with which cold finger touches you back',
+    rank: 9,
+    exp:"^.*thumb|forefinger|firstfinger|middlefinger|ringfinger|pinkie|littlefinger$",
+    cased: false,
+    active: true,
+    requires: ['leaveArtifact','visitLake','stayOutside'],
+    timeline: 'ceg'
+},
+{
+    name: 'Enter the times you drive away from your reflection. The road only leads back to the lake.',
+    rank: 10,
+    exp:"[1-9]",
+    cased: false,
+    active: true,
+    requires: ['leaveArtifact','visitLake','stayOutside'],
+    timeline: 'ceg'
+},
+// Wade into the lake
+{
+    name: 'Starts with the time you drop into the lake',
+    rank: 9,
+    exp:"^[1-9].*$",
+    cased: false,
+    active: true,
+    requires: ['leaveArtifact','visitLake','goInside'],
+    timeline: 'ceg'
+},
+{
+    name: 'Includes the depth you think you\'ve sunk to',
+    rank: 9,
+    exp:"[1-9][0-9]+feet|meters|miles|kilometers|yards",
+    cased: false,
+    active: true,
+    requires: ['leaveArtifact','visitLake','goInside'],
+    timeline: 'ceg'
+},
+{
+    name: 'Ends with the direction that you think you\'re swimming',
+    rank: 9,
+    exp:"^.*up|down|left|right$",
+    cased: false,
+    active: true,
+    requires: ['leaveArtifact','visitLake','goInside'],
+    timeline: 'ceg'
+},
+{
+    name: 'Enter the number of eyes glowing in the murky distance. You don\'t know how you know they\'re eyes... but you\'re very, very sure.',
+    rank: 10,
+    exp:"[1-9]",
+    cased: false,
+    active: true,
+    requires: ['leaveArtifact','visitLake','goInside'],
+    timeline: 'ceg'
+},
+// Enter the store
+{
+    name: 'Starts with the number of fingers on the associate who greets you',
+    rank: 9,
+    exp:"^[0-9]{1,2}.*$",
+    cased: false,
+    active: true,
+    requires: ['leaveArtifact','visitLot','goInside'],
+    timeline: 'ceg'
+},
+{
+    name: 'Includes the direction you walk when you reach its musty aisles',
+    rank: 9,
+    exp:"left|right|north|south|east|west|forward|backward|clockwise|counterclockwise|widdershins",
+    cased: false,
+    active: true,
+    requires: ['leaveArtifact','visitLot','goInside'],
+    timeline: 'ceg'
+},
+{
+    name: 'Ends with the price of the crumbling celebrity gossip magazine you buy',
+    rank: 9,
+    exp:"^.*[\$][1-9]\.?[0-9]*$",
+    cased: false,
+    active: true,
+    requires: ['leaveArtifact','visitLot','goInside'],
+    timeline: 'ceg'
+},
+{
+    name: 'Enter the number of pages in the magazine. You don\'t recognize a single name or face in it. The dateline is next week.',
+    rank: 10,
+    exp:"[1-9][0-9]",
+    cased: false,
+    active: true,
+    requires: ['leaveArtifact','visitLot','goInside'],
     timeline: 'ceg'
 },
 
-// Stop to help the officer
-// Ignore the officer and keep driving
-// Look into the lake
-// Wade into the lake
-// Enter the store
 // Waiting in the parking lot
 
-
-
-
-
+{
+    name: 'Starts with the degrees fahrenheit of your car\'s pleather seats',
+    rank: 9,
+    exp:"^[1-9][0-9].*$",
+    cased: false,
+    active: true,
+    requires: ['leaveArtifact','visitLot','stayOutside'],
+    timeline: 'ceg'
+},
+{
+    name: 'Includes the time you fall asleep in the driver\'s seat',
+    rank: 9,
+    exp:"(1[0-2]|0?[1-9]):([0-5]?[0-9])([AP]M)?",
+    cased: false,
+    active: true,
+    requires: ['leaveArtifact','visitLot','stayOutside'],
+    timeline: 'ceg'
+},
+{
+    name: 'Ends with the phase of the moon when you wake up',
+    rank: 9,
+    exp:"^.*new|crescent|quarter|gibbous|full$",
+    cased: false,
+    active: true,
+    requires: ['leaveArtifact','visitLot','stayOutside'],
+    timeline: 'ceg'
+},
+{
+    name: 'Enter the state with the best regional fair. Because that\'s where you are when you wake up.',
+    rank: 10,
+    exp: "alabama|alaska|arizona|arkansas|california|colorado|connecticut|delaware|florida|georgia|hawaii|idaho|illinois|indiana|iowa|kansas|kentucky|louisiana|maine|maryland|massachusetts|michigan|minnesota|mississippi|missouri|montana|nebraska|nevada|newhampshire|newjersey|newmexico|newyork|northcarolina|northdakota|ohio|oklahoma|oregon|pennsylvania|rhodeisland|southcarolina|southdakota|tennessee|texas|utah|vermont|virginia|washington|westvirginia|wisconsin|wyoming",
+    cased: false,
+    active: true,
+    requires: ['leaveArtifact','visitLot','stayOutside'],
+    timeline: 'ceg'
+},
 
 {
     name: 'Includes the date of the end of the world',
@@ -1114,11 +1356,11 @@ const submitPassword = (password) => {
                 finalChoices.push(gameResults.surrenderPolice);
             };
         } else if (gameState.leaveArtifact === true){
-            if (/deeplake/.test(password) === true){
+            if (/lake/.test(password) === true){
                 gameState.visitLake = true;
                 pruneBranch = 'visitLot';
                 finalChoices.push(gameResults.visitLake);
-            } else if (/parkinglot/.test(password) === true){
+            } else if (/lot/.test(password) === true){
                 gameState.parkingLot = true;
                 pruneBranch = 'visitlake';
                 finalChoices.push(gameResults.visitLot);
@@ -1178,17 +1420,25 @@ const submitPassword = (password) => {
             if (/depth/.test(password) === true){
                 gameState.goInside = true;
                 pruneBranch = 'stayOutside';
+                finalChoices.push(gameResults.diveLake);
+                finalCodeFragment = secretCode.diveLake;
             } else if (/mirror/.test(password) === true){
                 gameState.stayOutside = true;
                 pruneBranch = 'goInside';
+                finalChoices.push(gameResults.watchLake);
+                finalCodeFragment = secretCode.watchLake;
             };
         } else if (gameState.visitLot === true){
             if (/yes/.test(password) === true){
                 gameState.goInside = true;
                 pruneBranch = 'stayOutside';
+                finalChoices.push(gameResults.enterStore);
+                finalCodeFragment = secretCode.enterStore;
             } else if (/no/.test(password) === true){
                 gameState.stayOutside = true;
                 pruneBranch = 'goInside';
+                finalChoices.push(gameResults.outsideStore);
+                finalCodeFragment = secretCode.outsideStore;
             };
         };
         console.log(finalCodeFragment + 'set');
