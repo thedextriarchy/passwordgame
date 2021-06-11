@@ -53,13 +53,13 @@ let gameState = {
     keepDriving: false,
     stayOutside: false,
     goInside: false,
-    manEyes: 'PLACEHOLDER',
+    manEyes: '',
     womanDress: ''
 };
 
 let gameResults = {
     pickMirrors: 'You visited the hall of mirrors.',
-    pickWheel: 'You visiited the ferris wheel.',
+    pickWheel: 'You visited the ferris wheel.',
     takeMirror: 'You took the mirror shard.',
     leaveMirror: 'You left the mirror shard.',
     takeBox: 'You took the unlabeled box.',
@@ -83,21 +83,23 @@ let gameResults = {
 };
 
 let secretCode = {
-    viewMirror: '1:Why',
-    rejectMirror: '2:doesn\'t',
-    viewMirror: '3:the',
-    rejectMirror: '4:air',
-    stopBox: '5:taste',
-    driveBox: '6:as',
-    stopMirror: '7:light',
-    driveMirror: '8:as,',
-    diveLake: '9:it',
-    watchLake: '10:did,',
-    enterStore: '11:in',
-    outsideStore: '12:2012?'
+    viewMirror: '1.Why',
+    rejectMirror: '2.doesn\'t',
+    viewMirror: '3.the',
+    rejectMirror: '4.air',
+    stopBox: '5.taste',
+    driveBox: '6.the',
+    stopMirror: '7.way',
+    driveMirror: '8.it',
+    diveLake: '9.did',
+    watchLake: '10.back,',
+    enterStore: '11.in',
+    outsideStore: '12.1985?'
 };
 
-let fullSecretCode = 'Whydoesn\'ttheairtasteaslightasitdidin2012?';
+finalCodeFragment = secretCode.stopBox;
+
+let fullSecretCode = 'Whydoesn\'ttheairtastethewayitdidbackin1985?';
 
 
 
@@ -107,7 +109,7 @@ const questionLevel = [
 {
     rank: 1,
     min: 4,
-    max: 42,
+    max: 43,
 },
 {
     rank: 2,
@@ -151,8 +153,8 @@ const questionLevel = [
 },
 {
     rank: 10,
-    min: 8,
-    max: 16,
+    min: 1,
+    max: 20,
 },
 
 /*{
@@ -478,11 +480,12 @@ const ruleStory = [
         return 'Contains the number of teeth in the ' + gameState.manEyes + '-eyed man\'s smile'
    },
     rank: 8,
-    exp: "[2-3][0-9]",
+    exp: "[2-9][0-9]",
     cased: false,
     active: true,
     requires: ['pickWheel','takeArtifact','surrenderPolice'],
-    timeline: 'bdg'
+    timeline: 'bdg',
+    function:true
 },
 {
     name: 'Ends with his invitation: open the box?',
@@ -494,13 +497,16 @@ const ruleStory = [
     timeline: 'bdg'
 },
 {
-    name: 'Contains the number of teeth in the BLUE-clad woman\'s smile',
+    name: function() {
+        return 'Contains the number of buttons on the ' + gameState.womanDress + '-clad woman\'s dress'
+   },
     rank: 8,
-    exp: "[2-3][0-9]",
+    exp: "[1-9][0-9]?",
     cased: false,
     active: true,
     requires: ['pickMirrors','takeArtifact','surrenderPolice'],
-    timeline: 'ceg'
+    timeline: 'ceg',
+    function:true
 },
 {
     name: 'Ends with her command: look in the mirror shard?',
@@ -700,18 +706,117 @@ const ruleStory = [
     timeline: 'ceg'
 },
 {
-    name: 'Includes the ',
+    name: 'Includes the sound of the clock as you set it down.',
     rank: 9,
-    exp: "tk",
+    exp: "tick|tock",
     cased: false,
     active: true,
     requires: ['takeArtifact','viewArtifact','pickMirrors'],
     timeline: 'ceg'
 },
-
+{
+    name: 'Ends with the number of blank faces staring past you',
+    rank: 9,
+    exp: "tick|tock",
+    cased: false,
+    active: true,
+    requires: ['takeArtifact','viewArtifact','pickMirrors'],
+    timeline: 'ceg'
+},
+{
+    name: 'Enter the minutes it takes to leave the station. Nobody seems to even notice that you\'re there.',
+    rank: 10,
+    exp: "[1-9]",
+    cased: false,
+    active: true,
+    requires: ['takeArtifact','viewArtifact','pickMirrors'],
+    timeline: 'ceg'
+},
 // Resist the mirror
+{
+    name: 'Begins with the number of pieces the mirror shatters into',
+    rank: 9,
+    exp:"^[1-9].*$",
+    cased: false,
+    active: true,
+    requires: ['takeArtifact','rejectArtifact','pickMirrors'],
+    timeline: 'ceg'
+},
+{
+    name: 'Includes the last color your eyes see',
+    rank: 9,
+    exp:"red|green|blue|orange|yellow|white|black|gray|brown|silver|gold|purple|pink",
+    cased: false,
+    active: true,
+    requires: ['takeArtifact','rejectArtifact','pickMirrors'],
+    timeline: 'ceg'
+},
+{
+    name: 'Ends with the direction the woman laughs from',
+    rank: 9,
+    exp:"left|right|behind|ahead|beside",
+    cased: false,
+    active: true,
+    requires: ['takeArtifact','rejectArtifact','pickMirrors'],
+    timeline: 'ceg'
+},
+{
+    name: 'Enter the number of glass shards they pick from your eyes.',
+    rank: 10,
+    exp:"[1-9][0-9]*",
+    cased: false,
+    active: true,
+    requires: ['takeArtifact','rejectArtifact','pickMirrors'],
+    timeline: 'ceg'
+},
 // Stop to close the box
+{
+    name: 'Begins with the miles per hour at which your car crashes',
+    rank: 9,
+    exp:"^[1-9][0-9].*$",
+    cased: false,
+    active: true,
+    requires: ['takeArtifact','resistPolice','pickWheel','stopDriving'],
+    timeline: 'ceg'
+},
+{
+    name: 'Includes the hand you grab the box with frantically',
+    rank: 9,
+    exp:"left|right",
+    cased: false,
+    active: true,
+    requires: ['takeArtifact','resistPolice','pickWheel','stopDriving'],
+    timeline: 'ceg'
+},
+{
+    name: 'Ends with the time you snap it closed',
+    rank: 9,
+    exp:"^.*(1[0-2]|0?[1-9]):([0-5]?[0-9])([AP]M)?$",
+    cased: false,
+    active: true,
+    requires: ['takeArtifact','resistPolice','pickWheel','stopDriving'],
+    timeline: 'ceg'
+},
+{
+    name: 'Enter the minutes you lie in the wreckage as something vibrates beside you — but finally, with a hint of disappointment, goes still.',
+    rank: 10,
+    exp:"[1-9][0-9]*",
+    cased: false,
+    active: true,
+    requires: ['takeArtifact','resistPolice','pickWheel','stopDriving'],
+    timeline: 'ceg'
+},
 // Ignore the box and keep driving
+{
+    name: 'Starts with',
+    rank: 9,
+    exp:"^.*(1[0-2]|0?[1-9]):([0-5]?[0-9])([AP]M)?$",
+    cased: false,
+    active: true,
+    requires: ['takeArtifact','resistPolice','pickWheel','stopDriving'],
+    timeline: 'ceg'
+},
+
 // Stop to help the officer
 // Ignore the officer and keep driving
 // Look into the lake
@@ -773,7 +878,9 @@ class Rule {
 const pickRules = (level) => {
     let rules = [];
     //rules.push(ruleLength);
-    rules.push(ruleReq);
+    if (question < 10){
+        rules.push(ruleReq);
+    };
     if (question < 2){
         let filter = ruleGeneric.filter(rule => rule.rank === level.rank); // changed
         dice = diceRoll(filter);
@@ -832,7 +939,14 @@ const nextQuestion = () => {
     document.getElementById('password-rule-list').appendChild(node);
     for (let i = 0; i < currentRule.rules.length; i++){
         let node = document.createElement('div');
-        let textnode = document.createTextNode(currentRule.rules[i].name + ' - X');
+        let rulename;
+        if (currentRule.rules[i].function === true){
+            rulename = currentRule.rules[i].name() + ' - X';
+        } else {
+            rulename = currentRule.rules[i].name + ' - X';
+            //let textnode = document.createTextNode(currentRule.rules[i].name + ' - X');
+        };
+        let textnode = document.createTextNode(rulename);
         node.appendChild(textnode);
         node.style.color = '#ff0000';
         document.getElementById('password-rule-list').appendChild(node);
@@ -1077,6 +1191,7 @@ const submitPassword = (password) => {
                 pruneBranch = 'goInside';
             };
         };
+        console.log(finalCodeFragment + 'set');
     } else if (question === 10){
         endGame();
     };
@@ -1107,7 +1222,15 @@ const evaluatePasswordLength = (password) => {
 const evaluateRule = (rule,password) => {
     let regex = new RegExp(rule.exp);
     let node = document.createElement('div');
-    let textnode = document.createTextNode(rule.name + ' - ');
+    //let textnode = document.createTextNode(rule.name + ' - ');
+    let rulename;
+    if (rule.function === true){
+        rulename = rule.name() + ' - ';
+    } else {
+        rulename = rule.name + ' - ';
+        //let textnode = document.createTextNode(currentRule.rules[i].name + ' - X');
+    };
+    let textnode = document.createTextNode(rulename);
     node.appendChild(textnode);
     if (rule.cased === false) {
         password = password.toLowerCase();
@@ -1120,6 +1243,9 @@ const evaluateRule = (rule,password) => {
         if (rule.variable === 'manEyes'){
             gameState.manEyes = password.match(regex);
             console.log('Set man\'s eyes to ' + gameState.manEyes + '.');
+        } else if (rule.variable === 'womanDress'){
+            gameState.womanDress = password.match(regex);
+            console.log('Set woman\'s dress to ' + gameState.womanDress + '.');
         };
     } else {
         node.style.color = '#ff0000';
