@@ -210,6 +210,8 @@ const ruleReq = {
     //name: 'Begins with a US interstate highway',
     rank: 0,
     exp: "(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-\])",
+    //exp: "(1[0-2]|0?[1-9])((:[0-5][0-9])|[ap]m|(:[0-5][0-9])[ap]m)",
+    //exp:"^.*(1[0-2]|0?[1-9])((:[0-5][0-9])|[ap]m|(:[0-5][0-9])[ap]m)$",
     //exp:'^[i](nterstate)?[-]?[1-9].*$',
     cased: true
     //cased: false
@@ -267,7 +269,7 @@ const ruleStory = [
     timeline:'a'
 },
 {
-    name: 'Includes the state with the best regional fair',
+    name: 'Includes the state with the best traveling carnival',
     rank: 2,
     exp: "alabama|alaska|arizona|arkansas|california|colorado|connecticut|delaware|florida|georgia|hawaii|idaho|illinois|indiana|iowa|kansas|kentucky|louisiana|maine|maryland|massachusetts|michigan|minnesota|mississippi|missouri|montana|nebraska|nevada|newhampshire|newjersey|newmexico|newyork|northcarolina|northdakota|ohio|oklahoma|oregon|pennsylvania|rhodeisland|southcarolina|southdakota|tennessee|texas|utah|vermont|virginia|washington|westvirginia|wisconsin|wyoming",
     cased: false,
@@ -276,7 +278,7 @@ const ruleStory = [
     timeline:'a'
 },
 {
-    name: 'Starts with the price of a fairgrounds ticket',
+    name: 'Starts with the fair price of a carnival ticket',
     rank: 3,
     exp: "^[\$][0-9]+.*$",
     cased: false,
@@ -297,9 +299,9 @@ const ruleStory = [
 // Q4 WHEEL BRANCH
 
 {
-    name: 'Contains the height (in feet) where the wheel stops',
+    name: 'Contains the height (in feet) where your ferris wheel stops',
     rank: 4,
-    exp: "[1-9]{1}[0-9]{1,2}",
+    exp: "[1-9]{1}[0-9]+",
     cased: false,
     active: true,
     requires: ['pickWheel'],
@@ -317,14 +319,14 @@ const ruleStory = [
 {
     name: 'Contains the shape of the box he leaves',
     rank: 5,
-    exp: "rectangular|rectangle|square|round|circle|rhomboid|rhombus|triangle|triangular|spherical|sphere",
+    exp: "rectangular|rectangle|square|round|circle|rhomboid|rhombus|triangle|triangular|spherical|sphere|pentagon|hexagon|octogon|nonagon|decagon|hendecagon|dodecagon",
     cased: false,
     active: true,
     requires: ['pickWheel'],
     timeline:'b'
 },
 {
-    name: 'Ends with whether you take the box',
+    name: 'Ends with whether you take the unlabeled box',
     rank: 5,
     exp: "^.*yes|no$",
     cased: false,
@@ -335,7 +337,7 @@ const ruleStory = [
 
 // Q4 MIRROR BRANCH
 {
-    name: 'Contains the dress color of the woman who joins you',
+    name: 'Contains the dress color of the woman who joins you in the hall of mirrors',
     rank: 4,
     exp: "red|green|blue|purple|black|white|silver|gold|orange|pink|violet|yellow|brown",
     cased: false,
@@ -344,7 +346,7 @@ const ruleStory = [
     variable: 'womanDress'
 },
 {
-    name: 'Contains the room number where she smashes the glass',
+    name: 'Contains the room number where the woman smashes the glass',
     rank: 4,
     exp: "[0-9]+",
     cased: false,
@@ -362,7 +364,7 @@ const ruleStory = [
     timeline:'c'
 },
 {
-    name: 'Ends with whether you take the shard',
+    name: 'Ends with whether you take the mirror shard',
     rank: 5,
     exp: "^.*yes|no$",
     cased: false,
@@ -374,7 +376,7 @@ const ruleStory = [
 {
     name: 'Includes the time you run back to your car',
     rank: 6,
-    exp: "(1[0-2]|0?[1-9]):([0-5]?[0-9])([AP]M)?",
+    exp: "(1[0-2]|0?[1-9])((:[0-5][0-9])|[ap]m|(:[0-5][0-9])[ap]m)",
     cased: false,
     active: true,
     requires: [],
@@ -449,7 +451,7 @@ const ruleStory = [
 {
     name: 'Includes the rate of your beating heart',
     rank: 7,
-    exp: "[1-2][0-9]{2}",
+    exp: "[1-9][0-9]{1,2}",
     cased: false,
     active: true,
     requires: ['leaveArtifact'],
@@ -469,7 +471,7 @@ const ruleStory = [
 {
     name: 'Contains the time you enter the holding cell',
     rank: 8,
-    exp: "(1[0-2]|0?[1-9]):([0-5]?[0-9])([AP]M)?",
+    exp: "(1[0-2]|0?[1-9])((:[0-5][0-9])|[ap]m|(:[0-5][0-9])[ap]m)",
     cased: false,
     active: true,
     requires: ['takeArtifact','surrenderPolice'],
@@ -488,7 +490,7 @@ const ruleStory = [
     function:true
 },
 {
-    name: 'Ends with his invitation: open the box?',
+    name: 'Ends with the man\'s invitation: open the box?',
     rank: 8,
     exp: "^.*yes|no$",
     cased: false,
@@ -530,7 +532,7 @@ const ruleStory = [
 {
     name: 'Includes the time the box flies from the seat',
     rank: 8,
-    exp: "(1[0-2]|0?[1-9]):([0-5]?[0-9])([AP]M)?",
+    exp: "(1[0-2]|0?[1-9])((:[0-5][0-9])|[ap]m|(:[0-5][0-9])[ap]m)",
     cased: false,
     active: true,
     requires: ['pickWheel','takeArtifact','resistPolice'],
@@ -577,7 +579,7 @@ const ruleStory = [
 {
     name: 'Starts with the color of the lake',
     rank: 8,
-    exp: "^[blue|brown|black|white|clear|red|green|navy|teal].*$",
+    exp: "^blue|brown|black|white|clear|red|green|navy|teal.*$",
     cased: false,
     active: true,
     requires: ['leaveArtifact','visitLake'],
@@ -595,7 +597,7 @@ const ruleStory = [
 {
     name: 'Contains the height of the boxy store beyond the lot',
     rank: 8,
-    exp: "[1-9][0-9][feet|ft|meters|m]",
+    exp: "[1-9][0-9]feet|ft|meters|m",
     cased: false,
     active: true,
     requires: ['leaveArtifact','visitLot'],
@@ -628,7 +630,7 @@ const ruleStory = [
     exp: "^[1-9].*$",
     cased: false,
     active: true,
-    requires: ['takeArtifact','viewArtifact','pickWheel'],
+    requires: ['takeArtifact','viewArtifact','surrenderPolice','pickWheel'],
     timeline: 'ceg'
 },
 {
@@ -637,16 +639,16 @@ const ruleStory = [
     exp: "black|blue|void|nothing|white|clear|brown|red",
     cased: false,
     active: true,
-    requires: ['takeArtifact','viewArtifact','pickWheel'],
+    requires: ['takeArtifact','viewArtifact','surrenderPolice','pickWheel'],
     timeline: 'ceg'
 },
 {
     name: 'Ends with the time the man says: \"Don\'t worry. You\'ll know soon.\"',
     rank: 9,
-    exp: "(1[0-2]|0?[1-9]):([0-5]?[0-9])([AP]M)?",
+    exp: "^.*(1[0-2]|0?[1-9])((:[0-5][0-9])|[ap]m|(:[0-5][0-9])[ap]m)$",
     cased: false,
     active: true,
-    requires: ['takeArtifact','viewArtifact','pickWheel'],
+    requires: ['takeArtifact','viewArtifact','surrenderPolice','pickWheel'],
     timeline: 'ceg'
 },
 {
@@ -655,7 +657,7 @@ const ruleStory = [
     exp: "tk",
     cased: false,
     active: true,
-    requires: ['takeArtifact','viewArtifact','pickWheel'],
+    requires: ['takeArtifact','viewArtifact','surrenderPolice','pickWheel'],
     timeline: 'ceg'
 },
 // Resist the box
@@ -665,7 +667,7 @@ const ruleStory = [
     exp: "^[1-5].*$",
     cased: false,
     active: true,
-    requires: ['takeArtifact','rejectArtifact','pickWheel'],
+    requires: ['takeArtifact','rejectArtifact','surrenderPolice','pickWheel'],
     timeline: 'ceg'
 },
 {
@@ -674,16 +676,16 @@ const ruleStory = [
     exp: "hem|ahem",
     cased: false,
     active: true,
-    requires: ['takeArtifact','rejectArtifact','pickWheel'],
+    requires: ['takeArtifact','rejectArtifact','surrenderPolice','pickWheel'],
     timeline: 'ceg'
 },
 {
     name: 'Ends with the time the man says: \"Hm. I\'m sure the next vessel will cooperate.\"',
     rank: 9,
-    exp: "(1[0-2]|0?[1-9]):([0-5]?[0-9])([AP]M)?",
+    exp: "^.*(1[0-2]|0?[1-9])((:[0-5][0-9])|[ap]m|(:[0-5][0-9])[ap]m)$",
     cased: false,
     active: true,
-    requires: ['takeArtifact','rejectArtifact','pickWheel'],
+    requires: ['takeArtifact','rejectArtifact','surrenderPolice','pickWheel'],
     timeline: 'ceg'
 },
 {
@@ -692,7 +694,7 @@ const ruleStory = [
     exp: "[1-9][0-9][years]",
     cased: false,
     active: true,
-    requires: ['takeArtifact','rejectArtifact','pickWheel'],
+    requires: ['takeArtifact','rejectArtifact','surrenderPolice','pickWheel'],
     timeline: 'ceg'
 },
 // Look into the mirror
@@ -702,7 +704,7 @@ const ruleStory = [
     exp:"^[1-9].*$",
     cased: false,
     active: true,
-    requires: ['takeArtifact','viewArtifact','pickMirrors'],
+    requires: ['takeArtifact','viewArtifact','surrenderPolice','pickMirrors'],
     timeline: 'ceg'
 },
 {
@@ -711,7 +713,7 @@ const ruleStory = [
     exp: "tick|tock",
     cased: false,
     active: true,
-    requires: ['takeArtifact','viewArtifact','pickMirrors'],
+    requires: ['takeArtifact','viewArtifact','surrenderPolice','pickMirrors'],
     timeline: 'ceg'
 },
 {
@@ -720,7 +722,7 @@ const ruleStory = [
     exp: "tick|tock",
     cased: false,
     active: true,
-    requires: ['takeArtifact','viewArtifact','pickMirrors'],
+    requires: ['takeArtifact','viewArtifact','pickMirrors','surrenderPolice'],
     timeline: 'ceg'
 },
 {
@@ -729,7 +731,7 @@ const ruleStory = [
     exp: "[1-9]",
     cased: false,
     active: true,
-    requires: ['takeArtifact','viewArtifact','pickMirrors'],
+    requires: ['takeArtifact','viewArtifact','pickMirrors','surrenderPolice'],
     timeline: 'ceg'
 },
 // Resist the mirror
@@ -739,7 +741,7 @@ const ruleStory = [
     exp:"^[1-9].*$",
     cased: false,
     active: true,
-    requires: ['takeArtifact','rejectArtifact','pickMirrors'],
+    requires: ['takeArtifact','rejectArtifact','pickMirrors','surrenderPolice'],
     timeline: 'ceg'
 },
 {
@@ -748,7 +750,7 @@ const ruleStory = [
     exp:"red|green|blue|orange|yellow|white|black|gray|brown|silver|gold|purple|pink",
     cased: false,
     active: true,
-    requires: ['takeArtifact','rejectArtifact','pickMirrors'],
+    requires: ['takeArtifact','rejectArtifact','pickMirrors','surrenderPolice'],
     timeline: 'ceg'
 },
 {
@@ -757,7 +759,7 @@ const ruleStory = [
     exp:"left|right|behind|ahead|beside",
     cased: false,
     active: true,
-    requires: ['takeArtifact','rejectArtifact','pickMirrors'],
+    requires: ['takeArtifact','rejectArtifact','pickMirrors','surrenderPolice'],
     timeline: 'ceg'
 },
 {
@@ -766,7 +768,7 @@ const ruleStory = [
     exp:"[1-9][0-9]*",
     cased: false,
     active: true,
-    requires: ['takeArtifact','rejectArtifact','pickMirrors'],
+    requires: ['takeArtifact','rejectArtifact','pickMirrors','surrenderPolice'],
     timeline: 'ceg'
 },
 // Stop to close the box
@@ -791,7 +793,7 @@ const ruleStory = [
 {
     name: 'Ends with the time you snap it closed',
     rank: 9,
-    exp:"^.*(1[0-2]|0?[1-9]):([0-5]?[0-9])([AP]M)?$",
+    exp:"^.*(1[0-2]|0?[1-9])((:[0-5][0-9])|[ap]m|(:[0-5][0-9])[ap]m)$",
     cased: false,
     active: true,
     requires: ['takeArtifact','resistPolice','pickWheel','stopDriving'],
@@ -828,7 +830,7 @@ const ruleStory = [
 {
     name: 'Ends with the time it closes of its own accord',
     rank: 9,
-    exp:"^.*(1[0-2]|0?[1-9]):([0-5]?[0-9])([AP]M)?$",
+    exp:"^.*(1[0-2]|0?[1-9])((:[0-5][0-9])|[ap]m|(:[0-5][0-9])[ap]m)$",
     cased: false,
     active: true,
     requires: ['takeArtifact','resistPolice','pickWheel','keepDriving'],
@@ -847,7 +849,7 @@ const ruleStory = [
 {
     name: 'Starts with the time you stop to help the officer',
     rank: 9,
-    exp:"^.*(1[0-2]|0?[1-9]):([0-5]?[0-9])([AP]M)?$",
+    exp:"^(1[0-2]|0?[1-9])((:[0-5][0-9])|[ap]m|(:[0-5][0-9])[ap]m).*$",
     cased: false,
     active: true,
     requires: ['takeArtifact','resistPolice','pickMirrors','stopDriving'],
@@ -896,7 +898,7 @@ const ruleStory = [
 {
     name: 'Contains the time you realize your finger is no longer bleeding',
     rank: 9,
-    exp:"(1[0-2]|0?[1-9]):([0-5]?[0-9])([AP]M)?",
+    exp:"(1[0-2]|0?[1-9])((:[0-5][0-9])|[ap]m|(:[0-5][0-9])[ap]m)",
     cased: false,
     active: true,
     requires: ['takeArtifact','resistPolice','pickMirrors','stopDriving'],
@@ -933,7 +935,7 @@ const ruleStory = [
 {
     name: 'Contains the time you reach to touch your reflection',
     rank: 9,
-    exp:"(1[0-2]|0?[1-9]):([0-5]?[0-9])([AP]M)?",
+    exp:"(1[0-2]|0?[1-9])((:[0-5][0-9])|[ap]m|(:[0-5][0-9])[ap]m)",
     cased: false,
     active: true,
     requires: ['leaveArtifact','visitLake','stayOutside'],
@@ -949,7 +951,7 @@ const ruleStory = [
     timeline: 'ceg'
 },
 {
-    name: 'Enter the times you drive away from your reflection. The road only leads back to the lake.',
+    name: 'Enter the number of times you drive away from your reflection. The road only leads back to the lake.',
     rank: 10,
     exp:"[1-9]",
     cased: false,
@@ -961,7 +963,7 @@ const ruleStory = [
 {
     name: 'Starts with the time you drop into the lake',
     rank: 9,
-    exp:"^[1-9].*$",
+    exp:"^(1[0-2]|0?[1-9])((:[0-5][0-9])|[ap]m|(:[0-5][0-9])[ap]m).*$",
     cased: false,
     active: true,
     requires: ['leaveArtifact','visitLake','goInside'],
@@ -1046,7 +1048,7 @@ const ruleStory = [
 {
     name: 'Includes the time you fall asleep in the driver\'s seat',
     rank: 9,
-    exp:"(1[0-2]|0?[1-9]):([0-5]?[0-9])([AP]M)?",
+    exp:"(1[0-2]|0?[1-9])((:[0-5][0-9])|[ap]m|(:[0-5][0-9])[ap]m)",
     cased: false,
     active: true,
     requires: ['leaveArtifact','visitLot','stayOutside'],
