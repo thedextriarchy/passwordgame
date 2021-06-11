@@ -1,0 +1,44 @@
+<div class = "text-block" id = "introduction-rules">
+    <h1>Welcome To The Standardized Password Entry System</h1>
+    <p>A secure password is important for online account integrity. You will be asked to generate a secure password on the following page. Please meet all listed requirements to complete your secure password.</p>
+    <p>If you are unsure of the correct input for a given requirement, simply trust your impulses.</p>
+    <button id="start-button">BEGIN</button>
+    
+</div>
+
+<div id = "play-box">
+    <h2>Password #<span id = "password-number"></span></h2>
+    <h3>Time: <span id = "timer"></span></h3>
+    <p>Password rules:</p>
+    </span> <span id = "password-length-rule"></span> <span id = "password-length-check"></span>
+    <p><div id = "password-rule-list"></div></p>
+    <div id="inputs">
+        <p>Password: <input autocomplete="off" type="text" id = 'password-input' maxlength=43 size=30 onkeypress="return avoidSpace(event)"></input></p>
+        <button id = "submit-button">SUBMIT</button>
+        <div id = "warning-box"></div>
+    </div>
+</div>
+
+<div id = "results-box" class="text-block">
+    <div id = "password-results">
+        tk
+    </div>
+    <div><p>Time spent resetting passwords: <span id = "time-stopwatch"></span></p></div>
+    <div id = "password-incomplete"><p>Your password remains incomplete. Please select a new password.</p></div>
+    <p></p>
+    <div id="button-wrapper">
+        <button id = "next-button">NEXT</button>
+    </div>
+</div>
+<div id = "final-box" class="text-block">
+    <p>Your password has been accepted.</p>
+    <p>Your password is: <span id = "final-password"></span></p>
+    <p>You spent <span id = "final-time"></span> on the construction of your final password.</p>
+    <div id = 'game-choices'></div>
+    <p>Thank you for your participation. Please save or transcribe your keyword: <span id = "code-fragment"></span></p>
+    <p>© 20XX Adi Robertson, William Joel, and The Verge</p>
+
+</div>
+<div id = "secret-code-box" class="text-block">
+    BETTER NOT TO ASK
+</div>
