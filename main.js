@@ -99,7 +99,7 @@ let secretCode = {
     enterStore: 'tides?'
 };
 
-let secretCodePieces = ['Wherefore','2023','tastes','fathom','redolent','virtue','unbeknownst','against','prescient','antediluvians','begatting','tides?'];
+let secretCodePieces = ['Wherefore','2023','tastes','fathom','redolent','virtue','unbeknownst','against','prescient','antediluvians','begetting','tides?'];
 
 let finalCodeFragment;
 
@@ -223,7 +223,8 @@ const ruleReq = {
     name: 'Includes at least one uppercase letter, lowercase letter, number, and special character',
     //name: 'Begins with a US interstate highway',
     rank: 0,
-    exp: "(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[:#£€¥?!@$%^&*-\])",
+    //exp: "(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[:#£€¥?!@$%^&*-\])",
+    exp: '^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$',
     //exp: "(1[0-2]|0?[1-9])((:[0-5][0-9])|[ap]m|(:[0-5][0-9])[ap]m)",
     //exp:"^.*(1[0-2]|0?[1-9])((:[0-5][0-9])|[ap]m|(:[0-5][0-9])[ap]m)$",
     //exp:'^[i](nterstate)?[-]?[1-9].*$',
@@ -311,10 +312,11 @@ const ruleStory = [
     rank: 2,
     exp: 'e',
     cased: false,
-    requires:[]
+    requires:[],
+    active:true
 },
 {
-    name: 'Contains a Zodiac sign',
+    name: 'Contains the name of a Zodiac sign',
     rank: 2,
     exp: "aries|taurus|gemini|cancer|leo|virgo|libra|scorpio|sagittarius|capricorn|aquarius|pisces|rat|ox|tiger|rabbit|dragon|snake|horse|goat|monkey|rooster|dog|pig",
     cased:false,
@@ -324,7 +326,7 @@ const ruleStory = [
 {
     name: 'Begins with the first name of the most talented member of the Beatles',
     rank: 3,
-    exp: '^john|paul|george|ringo.*$',
+    exp: '^john|paul|george|ringo|pete.*$',
     cased:false,
     active:true,
     requires:[]
@@ -348,7 +350,7 @@ const ruleStory = [
     timeline:'a'
 },
 {
-    name: 'Starts with the fair price of a carnival ticket',
+    name: 'Begins with the fair price of a carnival ticket',
     rank: 5,
     exp: "^[\$][0-9]+.*$",
     cased: false,
@@ -389,14 +391,14 @@ const ruleStory = [
 {
     name: 'Contains the shape of the box he leaves',
     rank: 7,
-    exp: "rectangular|rectangle|diamond|pyramid|cylinder|square|round|circle|rhomboid|rhombus|triangle|triangular|spherical|sphere|pentagon|hexagon|octogon|nonagon|decagon|hendecagon|dodecagon",
+    exp: "rectangular|rectangle|diamond|pyramid|cylinder|square|round|circle|rhomboid|rhombus|triangle|triangular|spherical|sphere|pentagon|hexagon|octagon|nonagon|decagon|hendecagon|dodecagon",
     cased: false,
     active: true,
     requires: ['pickWheel'],
     timeline:'b'
 },
 {
-    name: 'Ends with whether you take the unlabeled box',
+    name: 'Ends with whether you take the unlabeled box: yes or no?',
     rank: 7,
     exp: "^.*yes|no$",
     cased: false,
@@ -427,14 +429,14 @@ const ruleStory = [
 {
     name: 'Contains the length (in inches) of the fresh cut on your finger',
     rank: 7,
-    exp: "[1-4]",
+    exp: "[1-9]",
     cased: false,
     active: true,
     requires: ['pickMirrors'],
     timeline:'c'
 },
 {
-    name: 'Ends with whether you take the mirror shard',
+    name: 'Ends with whether you take the mirror shard: yes or no?',
     rank: 7,
     exp: "^.*yes|no$",
     cased: false,
@@ -446,25 +448,26 @@ const ruleStory = [
 {
     name: 'Includes the time of day you run back to your car',
     rank: 8,
-    exp: "morning|evening|noon|dawn|dusk|midday|night|afternoon|suppertime|breakfast|brunch",
+    exp: "morning|evening|noon|dawn|dusk|midday|night|afternoon|suppertime|breakfast|brunch|((1[0-2]|0?[1-9])((:[0-5][0-9])|[ap]m|(:[0-5][0-9])[ap]m))",
     cased: false,
     active: true,
     requires: [],
     timeline: 'a'
 },
 {
-    name: 'Includes how many miles per hour over the speed limit you\'re driving',
+    name: 'Begins with how many miles per hour over the speed limit you\'re driving',
     rank: 8,
-    exp: "[1-9]",
+    exp: "^[1-9].*$",
     cased: false,
     active: true,
     requires: [],
     timeline: 'a'
 },
 {
-    name: 'Contains the interstate where the sirens start',
+    name: 'Ends with the highway number where the sirens start',
     rank: 8,
-    exp: "[i](nterstate)?[-]?[1-9]",
+    //exp: "[i](nterstate)?[-]?[1-9]",
+    exp:'^.*[1-9]$',
     cased: false,
     active: true,
     requires: [],
@@ -474,7 +477,7 @@ const ruleStory = [
 // COMBINATORIAL EXPLOSION STARTS
 
 {
-    name: 'Starts with the number of minutes until the officer sees the stolen box',
+    name: 'Begins with the number of minutes until the officer sees the stolen box',
     rank: 9,
     exp: "^[1-9].*$",
     cased: false,
@@ -492,7 +495,7 @@ const ruleStory = [
     timeline: 'bd'
 },
 {
-    name: 'Starts with the number of minutes until the officer sees the bloody mirror',
+    name: 'Begins with the number of minutes until the officer sees the bloody mirror',
     rank: 9,
     exp: "^[1-9].*$",
     cased: false,
@@ -519,9 +522,9 @@ const ruleStory = [
     timeline: 'f'
 },
 {
-    name: 'Includes the beats per minute of your racing heart',
+    name: 'Begins with the beats per minute of your racing heart',
     rank: 9,
-    exp: "[1-9][0-9]{1,2}",
+    exp: "^[1-9][0-9]{1,2}.*$",
     cased: false,
     active: true,
     requires: ['leaveArtifact'],
@@ -628,9 +631,9 @@ const ruleStory = [
     timeline: 'ceg'
 },
 {
-    name: 'Contains the angle the shard hits flesh',
+    name: 'Contains the angle (in degrees) the shard hits flesh',
     rank: 10,
-    exp: "[1-2]?[1-9][0-9]",
+    exp: "[1-9]",
     cased: false,
     active: true,
     requires: ['pickMirrors','takeArtifact','resistPolice'],
@@ -647,7 +650,7 @@ const ruleStory = [
 },
 // Get speeding ticket and visit lake/lot
 {
-    name: 'Starts with the color of the lake',
+    name: 'Begins with the color of the lake',
     rank: 10,
     exp: "^blue|brown|black|white|clear|red|green|navy|teal|pink|yellow|orange|violet|silver|gold.*$",
     cased: false,
@@ -656,7 +659,7 @@ const ruleStory = [
     timeline: 'ceg'
 },
 {
-    name: 'Contains its greatest attribute: a clear mirror or a great depth',
+    name: 'Contains its greatest attribute: a mirror or a depth?',
     rank: 10,
     exp: "mirror|depth",
     cased: false,
@@ -665,12 +668,12 @@ const ruleStory = [
     timeline: 'ceg'
 },
 {
-    name: 'Contains the height of the boxy store beyond the lot',
+    name: 'Contains the height (in feet) of the boxy store beyond the lot',
     rank: 10,
-    exp: "[1-9][0-9]feet|ft|meters|m",
+    exp: "[1-9][0-9]",
     cased: false,
     active: true,
-    requires: ['leaveArtifact','visitLot'],
+    requires: ['leaveArtifact','visitStore'],
     timeline: 'ceg'
 },
 {
@@ -679,23 +682,23 @@ const ruleStory = [
     exp: "[1-9]",
     cased: false,
     active: true,
-    requires: ['leaveArtifact','visitLot'],
+    requires: ['leaveArtifact','visitStore'],
     timeline: 'ceg'
 },
 {
-    name: 'Ends with a decision: go inside?',
+    name: 'Ends with a decision to go inside: yes or no?',
     rank: 10,
     exp: "^.*yes|no$",
     cased: false,
     active: true,
-    requires: ['leaveArtifact','visitLot'],
+    requires: ['leaveArtifact','visitStore'],
     timeline: 'ceg'
 },
 
 // QUESTIONS 9/10
 // Look into the box
 {
-    name: 'Begins with the seconds it takes to snap the latch',
+    name: 'Begins with the number of seconds it takes to snap the latch',
     rank: 11,
     exp: "^[1-9].*$",
     cased: false,
@@ -722,9 +725,9 @@ const ruleStory = [
     timeline: 'ceg'
 },
 {
-    name: 'Enter the date (DD/MM/YYYY) the first stars burn out. It\'s sooner than you think.',
+    name: 'Enter the date (MM/DD/YYYY) the first stars burn out. It\'s sooner than you think.',
     rank: 12,
-    exp: "(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})",
+    exp: '(0?[1-9]|1[012])[\/\-](0?[1-9]|[12][0-9]|3[01])[\/\-][0-9]{4}',
     cased: false,
     active: true,
     requires: ['takeArtifact','viewArtifact','surrenderPolice','pickWheel'],
@@ -769,7 +772,7 @@ const ruleStory = [
 },
 // Look into the mirror
 {
-    name: 'Begins with the seconds it takes to raise the mirror',
+    name: 'Begins with the number of seconds it takes to raise the mirror',
     rank: 11,
     exp:"^[1-9].*$",
     cased: false,
@@ -789,7 +792,7 @@ const ruleStory = [
 {
     name: 'Ends with the number of blank faces staring past you',
     rank: 11,
-    exp: "tick|tock",
+    exp: '^.*[1-5]$',
     cased: false,
     active: true,
     requires: ['takeArtifact','viewArtifact','pickMirrors','surrenderPolice'],
@@ -826,7 +829,7 @@ const ruleStory = [
 {
     name: 'Ends with the direction the woman laughs from',
     rank: 11,
-    exp:"left|right|behind|ahead|beside",
+    exp:"left|right|behind|ahead|beside|north|south|east|west",
     cased: false,
     active: true,
     requires: ['takeArtifact','rejectArtifact','pickMirrors','surrenderPolice'],
@@ -870,7 +873,7 @@ const ruleStory = [
     timeline: 'ceg'
 },
 {
-    name: 'Enter the minutes you lie in the wreckage as something vibrates beside you — but finally, with a hint of disappointment, goes still.',
+    name: 'Enter the minutes you lie in the wreckage as something vibrates beside you... but finally, with a hint of disappointment, goes still.',
     rank: 12,
     exp:"[1-9][0-9]*",
     cased: false,
@@ -880,7 +883,7 @@ const ruleStory = [
 },
 // Ignore the box and keep driving
 {
-    name: 'Starts with the seat the box rolls into',
+    name: 'Begins with the seat the box rolls into',
     rank: 11,
     exp:"^left|right|back|front|middle|driver|passenger.*$",
     cased: false,
@@ -917,7 +920,7 @@ const ruleStory = [
 },
 // Stop to help the officer
 {
-    name: 'Starts with the time you stop to help the officer',
+    name: 'Begins with the time you stop to help the officer',
     rank: 11,
     exp:"^(1[0-2]|0?[1-9])((:[0-5][0-9])|[ap]m|(:[0-5][0-9])[ap]m).*$",
     cased: false,
@@ -957,12 +960,12 @@ const ruleStory = [
 },
 // Ignore the officer and keep driving
 {
-    name: 'Starts with the miles you drive with the mirror beside you',
+    name: 'Begins with the miles you drive with the mirror beside you',
     rank: 11,
     exp:"^[1-9].*$",
     cased: false,
     active: true,
-    requires: ['takeArtifact','resistPolice','pickMirrors','stopDriving'],
+    requires: ['takeArtifact','resistPolice','pickMirrors','keepDriving'],
     timeline: 'ceg'
 },
 {
@@ -971,7 +974,7 @@ const ruleStory = [
     exp:"(1[0-2]|0?[1-9])((:[0-5][0-9])|[ap]m|(:[0-5][0-9])[ap]m)",
     cased: false,
     active: true,
-    requires: ['takeArtifact','resistPolice','pickMirrors','stopDriving'],
+    requires: ['takeArtifact','resistPolice','pickMirrors','keepDriving'],
     timeline: 'ceg'
 },
 {
@@ -980,21 +983,21 @@ const ruleStory = [
     exp:"[1-9]",
     cased: false,
     active: true,
-    requires: ['takeArtifact','resistPolice','pickMirrors','stopDriving'],
+    requires: ['takeArtifact','resistPolice','pickMirrors','keepDriving'],
     timeline: 'ceg'
 },
 {
     name: 'Enter the state where you first try to remember your name. No matter how hard you think, it won\'t come to you.',
     rank: 12,
-    exp: "alabama|alaska|arizona|arkansas|california|colorado|connecticut|delaware|florida|georgia|hawaii|idaho|illinois|indiana|iowa|kansas|kentucky|louisiana|maine|maryland|massachusetts|michigan|minnesota|mississippi|missouri|montana|nebraska|nevada|newhampshire|newjersey|newmexico|newyork|northcarolina|northdakota|ohio|oklahoma|oregon|pennsylvania|rhodeisland|southcarolina|southdakota|tennessee|texas|utah|vermont|virginia|washington|westvirginia|wisconsin|wyoming",
+    exp: "alabama|alaska|arizona|arkansas|california|colorado|connecticut|delaware|florida|georgia|hawaii|hawai\'i|idaho|illinois|indiana|iowa|kansas|kentucky|louisiana|maine|maryland|massachusetts|michigan|minnesota|mississippi|missouri|montana|nebraska|nevada|newhampshire|newjersey|newmexico|newyork|northcarolina|northdakota|ohio|oklahoma|oregon|pennsylvania|rhodeisland|southcarolina|southdakota|tennessee|texas|utah|vermont|virginia|washington|westvirginia|wisconsin|wyoming",
     cased: false,
     active: true,
-    requires: ['takeArtifact','resistPolice','pickMirrors','stopDriving'],
+    requires: ['takeArtifact','resistPolice','pickMirrors','keepDriving'],
     timeline: 'ceg'
 },
 // Look into the lake
 {
-    name: 'Starts with the hours you stare into the lake',
+    name: 'Begins with the hours you stare into the lake',
     rank: 11,
     exp:"^[1-9].*$",
     cased: false,
@@ -1031,7 +1034,7 @@ const ruleStory = [
 },
 // Wade into the lake
 {
-    name: 'Starts with the time you drop into the lake',
+    name: 'Begins with the time you drop into the lake',
     rank: 11,
     exp:"^(1[0-2]|0?[1-9])((:[0-5][0-9])|[ap]m|(:[0-5][0-9])[ap]m).*$",
     cased: false,
@@ -1051,7 +1054,7 @@ const ruleStory = [
 {
     name: 'Ends with the direction that you think you\'re swimming',
     rank: 11,
-    exp:"^.*up|down|left|right$",
+    exp:"^.*up|down|left|right|north|south|east|west$",
     cased: false,
     active: true,
     requires: ['leaveArtifact','visitLake','goInside'],
@@ -1068,12 +1071,12 @@ const ruleStory = [
 },
 // Enter the store
 {
-    name: 'Starts with the number of fingers on the associate who greets you',
+    name: 'Begins with the number of fingers on the associate who greets you',
     rank: 11,
     exp:"^[0-9]{1,2}.*$",
     cased: false,
     active: true,
-    requires: ['leaveArtifact','visitLot','goInside'],
+    requires: ['leaveArtifact','visitStore','goInside'],
     timeline: 'ceg'
 },
 {
@@ -1082,7 +1085,7 @@ const ruleStory = [
     exp:"left|right|north|south|east|west|forward|backward|clockwise|counterclockwise|widdershins",
     cased: false,
     active: true,
-    requires: ['leaveArtifact','visitLot','goInside'],
+    requires: ['leaveArtifact','visitStore','goInside'],
     timeline: 'ceg'
 },
 {
@@ -1091,7 +1094,7 @@ const ruleStory = [
     exp:"^.*[\$][1-9]\.?[0-9]*$",
     cased: false,
     active: true,
-    requires: ['leaveArtifact','visitLot','goInside'],
+    requires: ['leaveArtifact','visitStore','goInside'],
     timeline: 'ceg'
 },
 {
@@ -1100,19 +1103,19 @@ const ruleStory = [
     exp:"[1-9][0-9]",
     cased: false,
     active: true,
-    requires: ['leaveArtifact','visitLot','goInside'],
+    requires: ['leaveArtifact','visitStore','goInside'],
     timeline: 'ceg'
 },
 
 // Waiting in the parking lot
 
 {
-    name: 'Starts with the degrees fahrenheit of your car\'s pleather seats',
+    name: 'Begins with the degrees fahrenheit of your car\'s pleather seats',
     rank: 11,
     exp:"^[1-9][0-9].*$",
     cased: false,
     active: true,
-    requires: ['leaveArtifact','visitLot','stayOutside'],
+    requires: ['leaveArtifact','visitStore','stayOutside'],
     timeline: 'ceg'
 },
 {
@@ -1121,7 +1124,7 @@ const ruleStory = [
     exp:"(1[0-2]|0?[1-9])((:[0-5][0-9])|[ap]m|(:[0-5][0-9])[ap]m)",
     cased: false,
     active: true,
-    requires: ['leaveArtifact','visitLot','stayOutside'],
+    requires: ['leaveArtifact','visitStore','stayOutside'],
     timeline: 'ceg'
 },
 {
@@ -1130,16 +1133,16 @@ const ruleStory = [
     exp:"^.*new|crescent|quarter|gibbous|full$",
     cased: false,
     active: true,
-    requires: ['leaveArtifact','visitLot','stayOutside'],
+    requires: ['leaveArtifact','visitStore','stayOutside'],
     timeline: 'ceg'
 },
 {
-    name: 'Enter the state with the best regional fair. Because that\'s where you are when you wake up.',
+    name: 'Enter the state with the best traveling carnival. Because that\'s where you are when you wake up.',
     rank: 12,
-    exp: "alabama|alaska|arizona|arkansas|california|colorado|connecticut|delaware|florida|georgia|hawaii|idaho|illinois|indiana|iowa|kansas|kentucky|louisiana|maine|maryland|massachusetts|michigan|minnesota|mississippi|missouri|montana|nebraska|nevada|newhampshire|newjersey|newmexico|newyork|northcarolina|northdakota|ohio|oklahoma|oregon|pennsylvania|rhodeisland|southcarolina|southdakota|tennessee|texas|utah|vermont|virginia|washington|westvirginia|wisconsin|wyoming",
+    exp: "alabama|alaska|arizona|arkansas|california|colorado|connecticut|delaware|florida|georgia|hawaii||hawai\'i|idaho|illinois|indiana|iowa|kansas|kentucky|louisiana|maine|maryland|massachusetts|michigan|minnesota|mississippi|missouri|montana|nebraska|nevada|newhampshire|newjersey|newmexico|newyork|northcarolina|northdakota|ohio|oklahoma|oregon|pennsylvania|rhodeisland|southcarolina|southdakota|tennessee|texas|utah|vermont|virginia|washington|westvirginia|wisconsin|wyoming",
     cased: false,
     active: true,
-    requires: ['leaveArtifact','visitLot','stayOutside'],
+    requires: ['leaveArtifact','visitStore','stayOutside'],
     timeline: 'ceg'
 },
 
@@ -1369,14 +1372,22 @@ const submitPassword = (password) => {
     // Add the password to your final password
     finalPassword += password;
     // Systems for choice branching
-    if (question === 1){
-        let regex = new RegExp(fullSecretCode);
-        if (regex.test(password) === true){
-            enteredSecretCode();
-        };
-    };
     password = password.toLowerCase();
-    if (question === 5){
+    console.log('Password for choices: ' + password);
+    if (question === 1){
+        let pass = 0;
+        for (let i = 0; i < secretCodePieces.length; i++){
+            let regex = new RegExp(secretCodePieces[i].toLowerCase());
+            if (regex.test(password) === true){
+                pass++;
+            };
+            console.log(pass + ':' + regex);
+        };
+        if (pass === secretCodePieces.length){
+            enteredSecretCode();
+            console.log('secret code!');
+        };
+    } else if (question === 5){
         if (/hallofmirrors/.test(password) === true){
             //currentBranch = 'c';
             //pruneBranch = 'b';
@@ -1433,11 +1444,11 @@ const submitPassword = (password) => {
         } else if (gameState.leaveArtifact === true){
             if (/lake/.test(password) === true){
                 gameState.visitLake = true;
-                pruneBranch = 'visitLot';
+                pruneBranch = 'visitStore';
                 finalChoices.push(gameResults.visitLake);
             } else if (/lot/.test(password) === true){
-                gameState.parkingLot = true;
-                pruneBranch = 'visitlake';
+                gameState.visitStore = true;
+                pruneBranch = 'visitLake';
                 finalChoices.push(gameResults.visitLot);
             };
         };
@@ -1503,7 +1514,7 @@ const submitPassword = (password) => {
                 finalChoices.push(gameResults.watchLake);
                 finalCodeFragment = secretCodePieces[9];
             };
-        } else if (gameState.visitLot === true){
+        } else if (gameState.visitStore === true){
             if (/yes/.test(password) === true){
                 gameState.goInside = true;
                 pruneBranch = 'stayOutside';
@@ -1514,6 +1525,8 @@ const submitPassword = (password) => {
                 pruneBranch = 'goInside';
                 finalChoices.push(gameResults.outsideStore);
                 finalCodeFragment = secretCodePieces[11];
+            } else {
+                console.log('Error on inside/outside store.');
             };
         };
         console.log(finalCodeFragment + 'set');
@@ -1532,6 +1545,12 @@ const submitPassword = (password) => {
         prunebranch = '';
     };
     console.log('Choices: ' + finalChoices.join(','));
+    for (let i = 0; i < ruleStory.length; i++){
+        console.log(ruleStory[i].name + ruleStory[i].active);
+    };
+    for (const [key, value] of Object.entries(gameState)) {
+        console.log(`${key}: ${value}`);
+      }
 };
 
 const evaluatePasswordLength = (password) => {
@@ -1611,7 +1630,8 @@ const endGame = () => {
     document.getElementById('final-password').innerHTML = finalPassword;
     document.getElementById('final-password-length').innerHTML = finalPassword.length;
     document.getElementById('code-fragment').innerHTML = finalCodeFragment;
-    let finalFragmentNumber = (secretCodePieces.findIndex(finalCodeFragment) + 1);
+    let index = (element) => element === finalCodeFragment;
+    let finalFragmentNumber = (secretCodePieces.findIndex(index) + 1);
     document.getElementById('code-fragment-number').innerHTML = finalFragmentNumber;
     let gameChoices = document.getElementById('game-choices');
     let l = document.createElement('ul');
@@ -1638,9 +1658,12 @@ const restartGame = () => {
     for(var i in gameState) gameState[i] = false;
     for(var i in gameAttributes) gameAttributes[i] = '';
     timePlayed = 0;
+    finalPassword = '';
+    finalChoices = [];
     document.getElementById('final-box').style.display = 'none';
     document.getElementById('introduction-rules').style.display = 'block';
     document.getElementById('secret-code-box').style.display = 'none';
+    document.getElementById('game-choices').textContent = '';
 };
 
 // Lose game if timer hits 0
