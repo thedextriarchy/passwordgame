@@ -1092,7 +1092,7 @@ const ruleStory = [
 {
     name: 'Ends with the price of the crumbling celebrity gossip magazine you buy',
     rank: 11,
-    exp:"^.*[\$][1-9]\.?[0-9]*$",
+    exp:"^.*([\$£€¥][0-9])|([0-9]+[\$£€¥])$",
     cased: false,
     active: true,
     requires: ['leaveArtifact','visitStore','goInside'],
