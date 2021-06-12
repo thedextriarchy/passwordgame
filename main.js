@@ -350,7 +350,7 @@ const ruleStory = [
     timeline:'a'
 },
 {
-    name: 'Begins with the fair price of a carnival ticket',
+    name: 'Begins with the fair price (with currency) of a carnival ticket',
     rank: 5,
     exp: "^[\$][0-9]+.*$",
     cased: false,
@@ -391,7 +391,7 @@ const ruleStory = [
 {
     name: 'Contains the shape of the box he leaves',
     rank: 7,
-    exp: "rectangular|rectangle|diamond|pyramid|cylinder|square|round|circle|rhomboid|rhombus|triangle|triangular|spherical|sphere|pentagon|hexagon|octagon|nonagon|decagon|hendecagon|dodecagon",
+    exp: "rectangular|cube|rectangle|diamond|pyramid|cylinder|square|round|circle|rhomboid|rhombus|triangle|triangular|spherical|sphere|pentagon|hexagon|octagon|nonagon|decagon|hendecagon|dodecagon",
     cased: false,
     active: true,
     requires: ['pickWheel'],
