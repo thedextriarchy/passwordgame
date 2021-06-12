@@ -1235,6 +1235,7 @@ const ruleLengthCheck = document.getElementById('password-length-check');
 
 const continueGame = () => {
     nextQuestion();
+    submitButton.disabled = true;
     document.getElementById('results-box').style.display = 'none';
     document.getElementById('play-box').style.display = 'block';
     generateClock(document.getElementById('timer'));
