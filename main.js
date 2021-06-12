@@ -253,6 +253,7 @@ const ruleGeneric = [
     name: 'Includes at least one uppercase letter, lowercase letter, number, and special character',
     rank: 0,
     exp: "(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[:#?£€¥=!@¿$%^&*-\])",
+    //exp: '^([\$£€¥][0-9])|([0-9]+[\$£€¥]).*$',
     //exp: "(1[0-2]|0?[1-9])((:[0-5][0-9])|[ap]m|(:[0-5][0-9])[ap]m)",
     //exp:"^.*(1[0-2]|0?[1-9])((:[0-5][0-9])|[ap]m|(:[0-5][0-9])[ap]m)$",
     //exp:'^[i](nterstate)?[-]?[1-9].*$',
@@ -352,7 +353,7 @@ const ruleStory = [
 {
     name: 'Begins with the fair price (with currency) of a carnival ticket',
     rank: 5,
-    exp: "^[\$][0-9]+.*$",
+    exp: "^([\$£€¥][0-9])|([0-9]+[\$£€¥]).*$",
     cased: false,
     active: true,
     requires: [],
