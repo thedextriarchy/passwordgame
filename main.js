@@ -1221,6 +1221,7 @@ const pickRules = (level) => {
 
 const startGame = () => {
     timePlayed = 0;
+    submitButton.disabled = true; // TESTING THISs
     document.getElementById('introduction-rules').style.display = 'none';
     document.getElementById('play-box').style.display = 'block';
     generateClock(document.getElementById('timer'));
@@ -1672,6 +1673,7 @@ const enteredSecretCode = () => {
 };
 
 const restartGame = () => {
+    submitButton.disabled = true; // TESTING THIS
     prunebranch = '';
     finalChoices = [];
     question = 0;
